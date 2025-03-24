@@ -1,4 +1,29 @@
 @extends('admin.master-admin')
+@section('page-script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteBtn = document.querySelectorAll('.delete-btn');
+            deleteBtn.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "Apakah Anda akan menghapus berita dengan ID " + id,
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById(`delete-form-${id}`).submit();
+                        }
+                    });
+                })
+            })
+        })
+    </script>
+@endsection
 @section('content')
     <!--begin::App Content Header-->
     <div class="app-content-header">
@@ -57,11 +82,11 @@
                                                         width="100px" />
                                                 @endif
                                             </td>
-                                            <td style="width:150px;"><a href="#"
+                                            <td style="width:150px;"><a href="{{ route('news.edit', $item->id) }}"
                                                     class="btn btn-sm btn-warning me-1">Edit</a>
                                                 <button type="button" data-id="{{ $item->id }}"
                                                     class="btn btn-danger btn-sm delete-btn">Hapus</button>
-                                                <form method="POST" id="delete-form-{{ $item->id }}" action="#">
+                                                <form method="POST" id="delete-form-{{ $item->id }}" action="{{ route('news.destroy', $item->id) }}">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>

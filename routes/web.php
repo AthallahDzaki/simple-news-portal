@@ -29,5 +29,8 @@ Route::prefix('/admin')->group(function () {
         Route::get('/create', 'create')->name('news.create');
         Route::post('/store', 'store')->name('news.store');
         Route::post('/upload-image', 'uploadImage')->name('news.uploadImage');
+        Route::put('/update/{id}', 'update')->name('news.update');
+        Route::get('/edit/{id}', 'edit')->name('news.edit');
+        Route::delete('/destroy/{id}', 'destroy')->name('news.destroy');
     });
 });

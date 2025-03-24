@@ -24,7 +24,8 @@
                         <div class="border-bottom py-3">
                             <a href="#" class="display-4 text-dark mb-0 link-hover">{{ $item->title }}</a>
                         </div>
-                        <p class="mt-3 mb-4">{{ $item->content }}
+                        <p class="mt-3 mb-4">
+                            {!! $item->content !!}
                         </p>
                     @endforeach
                     <div class="bg-light p-4 rounded">
