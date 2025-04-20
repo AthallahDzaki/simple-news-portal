@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [MainController::class, 'index']);
-Route::prefix('/admin')->group(function () {
+Route::get('/login', [MainController::class, 'login'])->name('login');
+Route::post('/login', [MainController::class, 'handleLogin'])->name('login.submit');
+Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/berita', function () {
         echo "Selamat datang di halaman kelola berita";
